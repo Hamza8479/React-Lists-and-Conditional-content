@@ -52,34 +52,39 @@ function App() {
     setState({ ...state, showPerson: !state.showPerson });
   };
 
+  let person = null;
+
+  if (state.showPerson) {
+    person = (
+      // equal its to  some Jsx code
+      <div>
+        <Person
+          click={switchNameHandler.bind(this, "Hamza!!")}
+          name={state.people[0].name}
+          age={state.people[0].age}
+        >
+          {" "}
+          My Hobby: Develope and learn new stuff daily.{" "}
+        </Person>
+
+        <Person
+          name={state.people[1].name}
+          age={state.people[1].age}
+          changed={nameChangeHandler}
+        />
+
+        <Person name={state.people[2].name} age={state.people[2].age} />
+      </div>
+    );
+  }
   return (
     <div className="App">
       <h1>Hello there</h1>
       <button style={style} onClick={togglePersonHandler}>
         {""}
-        Switch Name
+        Toggle Persons
       </button>
-
-      {state.showPerson === true ? (
-        <div>
-          <Person
-            click={switchNameHandler.bind(this, "Hamza!!")}
-            name={state.people[0].name}
-            age={state.people[0].age}
-          >
-            {" "}
-            My Hobby: Develope and learn new stuff daily.{" "}
-          </Person>
-
-          <Person
-            name={state.people[1].name}
-            age={state.people[1].age}
-            changed={nameChangeHandler}
-          />
-
-          <Person name={state.people[2].name} age={state.people[2].age} />
-        </div>
-      ) : null}
+      {person}
     </div>
   );
 }
