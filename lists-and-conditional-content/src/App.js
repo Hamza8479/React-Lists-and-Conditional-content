@@ -13,20 +13,27 @@ function App() {
     showPerson: false,
   });
 
-  // const nameChangeHandler = (event) => {
-  //   setState({
-  //     people: [
-  //       { name: "Hamza", age: 22 },
-  //       { name: event.target.value, age: 23 },
-  //       { name: "Arslan", age: 19 },
-  //     ],
-  //     other: state.other,
-  //   });
-  // };
+  const nameChangeHandler = (event, id) => {
+    const personIndex = state.people.findIndex((p) => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...state.people[personIndex],
+    };
+    person.name = event.target.value;
+
+    const prsn = [...state.people];
+    prsn[personIndex] = Person;
+
+    setState({
+      people: prsn,
+    });
+  };
 
   const deletePersonHandler = (prsnIndex) => {
     // const person = state.people.slice();
-    // this will create new array that is copy of old one and alternate of this is below
+    // this will create new array that is copy of old one and alternative approach of this is below
     const person = [...state.people];
     person.splice(prsnIndex, 1);
     setState({
@@ -54,6 +61,9 @@ function App() {
                 deletePersonHandler(index);
               }}
               key={prsn.id}
+              changed={(event) => {
+                nameChangeHandler(event, prsn.id);
+              }}
             />
           );
         })}
