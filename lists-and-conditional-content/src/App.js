@@ -46,6 +46,15 @@ function App() {
     setState({ ...state, showPerson: !state.showPerson });
   };
 
+  const style = {
+    backgroundColor: "green",
+    color: "white",
+    font: "inherit",
+    border: "1px solid blue",
+    padding: "8px",
+    cursor: "pointer",
+  };
+
   let person = null;
 
   if (state.showPerson) {
@@ -69,15 +78,8 @@ function App() {
         })}
       </div>
     );
+    style.backgroundColor = "red";
   }
-
-  const style = {
-    backgroundColor: "white",
-    font: "inherit",
-    border: "1px solid blue",
-    padding: "8px",
-    cursor: "pointer",
-  };
 
   return (
     <div className="App">
