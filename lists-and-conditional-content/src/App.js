@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
 
 function App() {
@@ -53,6 +54,10 @@ function App() {
     border: "1px solid blue",
     padding: "8px",
     cursor: "pointer",
+    ":hover": {
+      backgroundColor: "lightgreen",
+      color: "black",
+    },
   };
 
   let person = null;
@@ -79,18 +84,33 @@ function App() {
       </div>
     );
     style.backgroundColor = "red";
+    style[":hover"] = {
+      backgroundColor: "orangered",
+      color: "black",
+    };
   }
-
+  // let classes = ["red", "bold"].join(" "); return red bold
+  const classes = [];
+  if (state.people.length <= 2) {
+    classes.push("red"); // classes = ['red']
+  }
+  if (state.people.length <= 1) {
+    classes.push("bold"); // classes = ['red', 'bold']
+  }
   return (
-    <div className="App">
-      <h1>Hello there</h1>
-      <button style={style} onClick={togglePersonHandler}>
-        {""}
-        Toggle Persons
-      </button>
-      {person}
-    </div>
+    <StyleRoot>
+      <div className="App">
+        <h1>Hello there</h1>
+        <p className={classes.join(" ")}>This is really working</p>
+        <button style={style} onClick={togglePersonHandler}>
+          {""}
+          Toggle Persons
+        </button>
+
+        {person}
+      </div>
+    </StyleRoot>
   );
 }
 
-export default App;
+export default Radium(App);

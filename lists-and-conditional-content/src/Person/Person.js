@@ -1,9 +1,16 @@
 import React from "react";
 import "./Person.css";
+import Radium from "radium";
 
 function Person(props) {
+  const style = {
+    // "@media and screen (max-width:500px)": {},
+    "@media (min-width:400px)": {
+      width: "400px",
+    },
+  };
   return (
-    <div className="Person">
+    <div className="Person" style={style}>
       <p onClick={props.click}>
         {" "}
         I'm {props.name} and I'm {props.age} years old{" "}
@@ -20,4 +27,4 @@ function Person(props) {
   );
 }
 
-export default Person;
+export default Radium(Person);
