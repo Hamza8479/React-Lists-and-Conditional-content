@@ -23,6 +23,10 @@ function Person(props) {
   //     width: 400px;
   //   }
   // `;
+  const rnd = Math.random();
+  if (rnd > 0.9) {
+    throw new Error("something went wrong");
+  }
   return (
     <div className={classes.Person}>
       {/* //  <StyledDiv> */}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 function App() {
   const [state, setState] = useState({
@@ -68,17 +69,18 @@ function App() {
       <div>
         {state.people.map((prsn, index) => {
           return (
-            <Person
-              name={prsn.name}
-              age={prsn.age}
-              click={() => {
-                deletePersonHandler(index);
-              }}
-              key={prsn.id}
-              changed={(event) => {
-                nameChangeHandler(event, prsn.id);
-              }}
-            />
+            <ErrorBoundary key={prsn.id}>
+              <Person
+                name={prsn.name}
+                age={prsn.age}
+                click={() => {
+                  deletePersonHandler(index);
+                }}
+                changed={(event) => {
+                  nameChangeHandler(event, prsn.id);
+                }}
+              />
+            </ErrorBoundary>
           );
         })}
       </div>
