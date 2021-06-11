@@ -82,25 +82,10 @@ function App() {
     };
   }
   // let classes = ["red", "bold"].join(" "); return red bold
-  const classes = [];
-  if (state.people.length <= 2) {
-    classes.push("red"); // classes = ['red']
-  }
-  if (state.people.length <= 1) {
-    classes.push("bold"); // classes = ['red', 'bold']
-  }
+
   return (
     <StyleRoot>
-      <div className="App">
-        <h1>Hello there</h1>
-        <p className={classes.join(" ")}>This is really working</p>
-        <button style={style} onClick={togglePersonHandler}>
-          {""}
-          Toggle Persons
-        </button>
-
-        {personn}
-      </div>
+      <div className="App">{personn}</div>
     </StyleRoot>
   );
 }
