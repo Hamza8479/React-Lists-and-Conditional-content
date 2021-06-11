@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import classes from "./Person.module.css";
 
 function Person(props) {
@@ -23,10 +23,10 @@ function Person(props) {
   //     width: 400px;
   //   }
   // `;
-  const rnd = Math.random();
-  if (rnd > 0.9) {
-    throw new Error("something went wrong");
-  }
+  // const rnd = Math.random();
+  // if (rnd > 0.9) {
+  //   throw new Error("something went wrong");
+  // }
   return (
     <div className={classes.Person}>
       {/* //  <StyledDiv> */}

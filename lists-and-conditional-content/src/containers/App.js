@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 import Radium, { StyleRoot } from "radium";
-import Person from "./Person/Person";
-import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import Person from "../components/Persons/Person/Person";
+import Persons from "../components/Persons/Persons";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 function App() {
   const [state, setState] = useState({
@@ -61,28 +62,17 @@ function App() {
     },
   };
 
-  let person = null;
+  let personn = null;
 
   if (state.showPerson) {
-    person = (
+    personn = (
       // equal its to  some Jsx code
       <div>
-        {state.people.map((prsn, index) => {
-          return (
-            <ErrorBoundary key={prsn.id}>
-              <Person
-                name={prsn.name}
-                age={prsn.age}
-                click={() => {
-                  deletePersonHandler(index);
-                }}
-                changed={(event) => {
-                  nameChangeHandler(event, prsn.id);
-                }}
-              />
-            </ErrorBoundary>
-          );
-        })}
+        <Persons
+          persons={state.people}
+          clicked={deletePersonHandler}
+          changedname={nameChangeHandler}
+        />
       </div>
     );
     style.backgroundColor = "red";
@@ -109,7 +99,7 @@ function App() {
           Toggle Persons
         </button>
 
-        {person}
+        {personn}
       </div>
     </StyleRoot>
   );
