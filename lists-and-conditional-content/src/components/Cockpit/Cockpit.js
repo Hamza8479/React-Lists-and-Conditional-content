@@ -1,7 +1,7 @@
 import React from "react";
 
-function Cockpit() {
+const Cockpit = () => {
   return <div></div>;
-}
+};
 
 export default Cockpit;
