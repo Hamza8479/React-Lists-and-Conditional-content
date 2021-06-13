@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Classes from "./Cockpit.module.css";
 
 const Cockpit = (props) => {
+  useEffect(() => {
+    console.log("[Cockpit.js useEffect]");
+    setTimeout(() => {
+      alert("saved data to cloud!");
+    }, 1000);
+    return () => {
+      // clearTimeout(timer);
+      console.log("[Cockpit.js] cleanup work in useEffect");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("[Cockpit.js 2nd useEffect]");
+    return () => {
+      console.log("[Cockpit.js] cleanup work in 2nd useEffect");
+    };
+  });
   const classes = [];
-  if (props.state.people.length <= 2) {
-    classes.push("red"); // classes = ['red']
+  let btnClass = "";
+  if (props.showPerson) {
+    btnClass = Classes.Red;
   }
-  if (props.state.people.length <= 1) {
-    classes.push("bold"); // classes = ['red', 'bold']
+  if (props.people.length <= 2) {
+    classes.push(Classes.red); // classes = ['red']
   }
+  if (props.people.length <= 1) {
+    classes.push(Classes.bold); // classes = ['red' 'bold']
+  }
+
   return (
-    <div>
+    <div className={Classes.Cockpit}>
       <h1>Hello there</h1>
       <p className={classes.join(" ")}>This is really working</p>
-      <button style={style} onClick={togglePersonHandler}>
+      <button className={btnClass} onClick={props.toggle}>
         {""}
         Toggle Persons
       </button>

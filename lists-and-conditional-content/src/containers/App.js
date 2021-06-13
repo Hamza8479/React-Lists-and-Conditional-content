@@ -4,6 +4,7 @@ import Radium, { StyleRoot } from "radium";
 import Person from "../components/Persons/Person/Person";
 import Persons from "../components/Persons/Persons";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 function App() {
   const [state, setState] = useState({
@@ -14,6 +15,7 @@ function App() {
     ],
     other: "other Data",
     showPerson: false,
+    showCockpit: true,
   });
 
   const nameChangeHandler = (event, id) => {
@@ -49,43 +51,39 @@ function App() {
     setState({ ...state, showPerson: !state.showPerson });
   };
 
-  const style = {
-    backgroundColor: "green",
-    color: "white",
-    font: "inherit",
-    border: "1px solid blue",
-    padding: "8px",
-    cursor: "pointer",
-    ":hover": {
-      backgroundColor: "lightgreen",
-      color: "black",
-    },
-  };
-
   let personn = null;
 
   if (state.showPerson) {
     personn = (
       // equal its to  some Jsx code
-      <div>
-        <Persons
-          persons={state.people}
-          clicked={deletePersonHandler}
-          changedname={nameChangeHandler}
-        />
-      </div>
+      <Persons
+        persons={state.people}
+        clicked={deletePersonHandler}
+        changedname={nameChangeHandler}
+      />
     );
-    style.backgroundColor = "red";
-    style[":hover"] = {
-      backgroundColor: "orangered",
-      color: "black",
-    };
   }
   // let classes = ["red", "bold"].join(" "); return red bold
 
   return (
     <StyleRoot>
-      <div className="App">{personn}</div>
+      <div className="App">
+        <button
+          onClick={() => {
+            setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {state.showCockpit ? (
+          <Cockpit
+            showPerson={state.showPerson}
+            people={state.people}
+            toggle={togglePersonHandler}
+          />
+        ) : null}
+        {personn}
+      </div>
     </StyleRoot>
   );
 }
