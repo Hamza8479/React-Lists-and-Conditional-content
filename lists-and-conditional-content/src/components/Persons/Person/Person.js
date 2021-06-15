@@ -1,6 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 import classes from "./Person.module.css";
+import Auxiliary from "../../../hoc/Auxiliary";
 
 function Person(props) {
   // Radium
@@ -28,8 +29,7 @@ function Person(props) {
   //   throw new Error("something went wrong");
   // }
   return (
-    <div className={classes.Person}>
-      {/* //  <StyledDiv> */}
+    <Auxiliary>
       <p onClick={props.click}>
         {" "}
         I'm {props.name} and I'm {props.age} years old{" "}
@@ -42,8 +42,8 @@ function Person(props) {
         onChange={props.changed}
         value={props.name}
       />
-      {/* </StyledDiv> */}
-    </div>
+    </Auxiliary>
+    //  {/* </div> </StyledDiv>*/}
   );
 }
 
