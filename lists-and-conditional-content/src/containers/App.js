@@ -5,6 +5,7 @@ import Person from "../components/Persons/Person/Person";
 import Persons from "../components/Persons/Persons";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
 
 function App() {
   const [state, setState] = useState({
@@ -66,25 +67,25 @@ function App() {
   // let classes = ["red", "bold"].join(" "); return red bold
 
   return (
-    <StyleRoot>
-      <div className="App">
-        <button
-          onClick={() => {
-            setState({ showCockpit: false });
-          }}
-        >
-          Remove Cockpit
-        </button>
-        {state.showCockpit ? (
-          <Cockpit
-            showPerson={state.showPerson}
-            peopleLength={state.people.length}
-            toggle={togglePersonHandler}
-          />
-        ) : null}
-        {personn}
-      </div>
-    </StyleRoot>
+    // <StyleRoot>
+    <WithClass classes="App">
+      <button
+        onClick={() => {
+          setState({ showCockpit: false });
+        }}
+      >
+        Remove Cockpit
+      </button>
+      {state.showCockpit ? (
+        <Cockpit
+          showPerson={state.showPerson}
+          peopleLength={state.people.length}
+          toggle={togglePersonHandler}
+        />
+      ) : null}
+      {personn}
+    </WithClass>
+    // </StyleRoot>
   );
 }
 
