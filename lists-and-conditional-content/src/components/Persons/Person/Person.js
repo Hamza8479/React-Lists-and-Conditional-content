@@ -2,6 +2,7 @@ import React from "react";
 // import styled from "styled-components";
 import classes from "./Person.module.css";
 import Auxiliary from "../../../hoc/Auxiliary";
+import WithClass from "../../../hoc/WithClass";
 
 function Person(props) {
   // Radium
@@ -29,7 +30,7 @@ function Person(props) {
   //   throw new Error("something went wrong");
   // }
   return (
-    <Auxiliary>
+    <WithClass classes={classes.Person}>
       <p onClick={props.click}>
         {" "}
         I'm {props.name} and I'm {props.age} years old{" "}
@@ -42,7 +43,7 @@ function Person(props) {
         onChange={props.changed}
         value={props.name}
       />
-    </Auxiliary>
+    </WithClass>
     //  {/* </div> </StyledDiv>*/}
   );
 }
