@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 // import styled from "styled-components";
 import classes from "./Person.module.css";
 import Auxiliary from "../../../hoc/Auxiliary";
@@ -48,5 +49,10 @@ function Person(props) {
     //  {/* </div> </StyledDiv>*/}
   );
 }
-
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func,
+};
 export default Person;
