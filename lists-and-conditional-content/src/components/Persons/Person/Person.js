@@ -35,13 +35,14 @@ function Person(props) {
         {" "}
         I'm {props.name} and I'm {props.age} years old{" "}
       </p>
-      <p>{props.children}</p>
+      <p key="i1">{props.children}</p>
       <input
         type="text"
         name=""
         id=""
         onChange={props.changed}
         value={props.name}
+        key="i2"
       />
     </WithClass>
     //  {/* </div> </StyledDiv>*/}

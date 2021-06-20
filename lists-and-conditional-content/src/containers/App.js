@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import Radium, { StyleRoot } from "radium";
+// import Radium, { StyleRoot } from "radium";
 import Person from "../components/Persons/Person/Person";
 import Persons from "../components/Persons/Persons";
-import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
+// import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Cockpit from "../components/Cockpit/Cockpit";
 import WithClass from "../hoc/WithClass";
 
@@ -17,6 +17,7 @@ function App() {
     other: "other Data",
     showPerson: false,
     showCockpit: true,
+    changeCounter: 0,
   });
 
   const nameChangeHandler = (event, id) => {
@@ -32,8 +33,11 @@ function App() {
     const prsn = [...state.people];
     prsn[personIndex] = Person;
 
-    setState({
-      people: prsn,
+    setState((prevState, props) => {
+      return {
+        people: prsn,
+        changeCounter: prevState.changeCounter + 1,
+      };
     });
   };
 
@@ -61,6 +65,7 @@ function App() {
         persons={state.people}
         clicked={deletePersonHandler}
         changedname={nameChangeHandler}
+        key={state.id}
       />
     );
   }
@@ -89,4 +94,6 @@ function App() {
   );
 }
 
-export default Radium(App);
+export default App;
+
+// export default Radium(App);
