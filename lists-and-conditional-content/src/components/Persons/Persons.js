@@ -15,6 +15,7 @@ const Persons = (props) =>
           changed={(event) => {
             props.changedname(event, prsn.id);
           }}
+          isAuth={props.isAuthenticated}
         />
       </Fragment>
     );

@@ -6,6 +6,7 @@ import Persons from "../components/Persons/Persons";
 // import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Cockpit from "../components/Cockpit/Cockpit";
 import WithClass from "../hoc/WithClass";
+import authcontext from "../context/auth-context";
 
 function App() {
   const [state, setState] = useState({
@@ -18,6 +19,7 @@ function App() {
     showPerson: false,
     showCockpit: true,
     changeCounter: 0,
+    authenticated: false,
   });
 
   const nameChangeHandler = (event, id) => {
@@ -31,12 +33,14 @@ function App() {
     person.name = event.target.value;
 
     const prsn = [...state.people];
-    prsn[personIndex] = Person;
+    prsn[personIndex] = person;
 
     setState((prevState, props) => {
       return {
         people: prsn,
         changeCounter: prevState.changeCounter + 1,
+        showPerson: prevState.showPerson,
+        showCockpit: prevState.showCockpit,
       };
     });
   };
@@ -46,14 +50,23 @@ function App() {
     // this will create new array that is copy of old one and alternative approach of this is below
     const person = [...state.people];
     person.splice(prsnIndex, 1);
-    setState({
-      people: person,
+    setState((prevState, props) => {
+      return {
+        people: person,
+        showPerson: prevState.showPerson,
+        showCockpit: prevState.showCockpit,
+      };
     });
   };
 
   const togglePersonHandler = () => {
     // const doseShow = !state.showPerson;
-    setState({ ...state, showPerson: !state.showPerson });
+    setState((prevState, props) => {
+      return {
+        ...state,
+        showPerson: !prevState.showPerson,
+      };
+    });
   };
 
   let personn = null;
@@ -66,11 +79,17 @@ function App() {
         clicked={deletePersonHandler}
         changedname={nameChangeHandler}
         key={state.id}
+        isAuthenticated={state.authenticated}
       />
     );
   }
   // let classes = ["red", "bold"].join(" "); return red bold
-
+  const loginHandler = () => {
+    setState({
+      ...state,
+      authenticated: true,
+    });
+  };
   return (
     // <StyleRoot>
     <WithClass classes="App">
@@ -81,14 +100,19 @@ function App() {
       >
         Remove Cockpit
       </button>
+      {/* <authcontext.Provider
+        value={{ authenticated: state.authenticated, login: loginHandler }}
+      > */}
       {state.showCockpit ? (
         <Cockpit
           showPerson={state.showPerson}
           peopleLength={state.people.length}
           toggle={togglePersonHandler}
+          login={loginHandler}
         />
       ) : null}
       {personn}
+      {/* </authcontext.Provider> */}
     </WithClass>
     // </StyleRoot>
   );

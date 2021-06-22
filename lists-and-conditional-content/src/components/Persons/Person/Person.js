@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 // import styled from "styled-components";
 import classes from "./Person.module.css";
 import Auxiliary from "../../../hoc/Auxiliary";
 import WithClass from "../../../hoc/WithClass";
+import authcontext from "../../../context/auth-context";
 
 function Person(props) {
   // Radium
@@ -30,12 +31,18 @@ function Person(props) {
   // if (rnd > 0.9) {
   //   throw new Error("something went wrong");
   // }
-
+  const inputRef = useRef(null);
   useEffect(() => {
-    // document.querySelector("input").focus(); by doing this first input will select
+    inputRef.current.focus();
   });
   return (
     <WithClass classes={classes.Person}>
+      {/* <authcontext.Consumer>
+        {(context) => {
+          context.isAuthenticated ? <p>Authenticated!</p> : <p>Please Login</p>;
+        }}
+      </authcontext.Consumer> */}
+      {props.isAuth ? <p>Authenticated!</p> : <p>Please Login</p>}
       <p onClick={props.click}>
         {" "}
         I'm {props.name} and I'm {props.age} years old{" "}
@@ -48,9 +55,8 @@ function Person(props) {
         onChange={props.changed}
         value={props.name}
         key="i2"
-        ref={(inputEl) => {
-          inputEl.focus();
-        }}
+        ref={inputRef}
+        // isAuth={props.isAuthenticated}
       />
     </WithClass>
     //  {/* </div> </StyledDiv>*/}
