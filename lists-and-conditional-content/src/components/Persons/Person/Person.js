@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import PropTypes from "prop-types";
 // import styled from "styled-components";
 import classes from "./Person.module.css";
@@ -32,8 +32,10 @@ function Person(props) {
   //   throw new Error("something went wrong");
   // }
   const inputRef = useRef(null);
+  const authCo = useContext(authcontext);
   useEffect(() => {
     inputRef.current.focus();
+    console.log(authCo);
   });
   return (
     <WithClass classes={classes.Person}>
@@ -42,7 +44,7 @@ function Person(props) {
           context.isAuthenticated ? <p>Authenticated!</p> : <p>Please Login</p>;
         }}
       </authcontext.Consumer> */}
-      {props.isAuth ? <p>Authenticated!</p> : <p>Please Login</p>}
+      {authCo.authenticated ? <p>Authenticated!</p> : <p>Please Login</p>}
       <p onClick={props.click}>
         {" "}
         I'm {props.name} and I'm {props.age} years old{" "}

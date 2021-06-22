@@ -100,19 +100,19 @@ function App() {
       >
         Remove Cockpit
       </button>
-      {/* <authcontext.Provider
+      <authcontext.Provider
         value={{ authenticated: state.authenticated, login: loginHandler }}
-      > */}
-      {state.showCockpit ? (
-        <Cockpit
-          showPerson={state.showPerson}
-          peopleLength={state.people.length}
-          toggle={togglePersonHandler}
-          login={loginHandler}
-        />
-      ) : null}
-      {personn}
-      {/* </authcontext.Provider> */}
+      >
+        {state.showCockpit ? (
+          <Cockpit
+            showPerson={state.showPerson}
+            peopleLength={state.people.length}
+            toggle={togglePersonHandler}
+            login={loginHandler}
+          />
+        ) : null}
+        {personn}
+      </authcontext.Provider>
     </WithClass>
     // </StyleRoot>
   );

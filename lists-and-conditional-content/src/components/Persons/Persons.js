@@ -11,11 +11,11 @@ const Persons = (props) =>
           click={() => {
             props.clicked(index);
           }}
-          key={prsn.id}
+          key="p12"
           changed={(event) => {
             props.changedname(event, prsn.id);
           }}
-          isAuth={props.isAuthenticated}
+          // isAuth={props.isAuthenticated}
         />
       </Fragment>
     );
